@@ -1,41 +1,41 @@
-import React, { useState, useEffect } from 'react'
-import io from "socket.io-client"
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts'
-
-const socket = io()
+import React, { useRef, useEffect } from 'react'
+import flvjs from "flv.js"
+import "./App.css"
 
 const App = () => {
-  const [adc, setAdc] = useState([])
 
-  useEffect(() => {
-    let i = 0
-    socket.on("adc", value => {
-      setAdc(adc => ([
-        ...adc,
-        {
-          name: i++,
-          value
-        }
-      ]))
-    })
-  }, [])
+    const videoElement = useRef(null)
 
-  return (
-    <div>
-      <LineChart
-        width={window.innerWidth}
-        height={window.innerHeight}
-        data={adc}
-        margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
-      >
-        <Line type="monotone" dataKey="value" stroke="#8884d8" />
-        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-      </LineChart>
-    </div>
-  )
+    useEffect(() => {
+        const flvPlayer = flvjs.createPlayer({
+            type: 'flv',
+            url: 'http://tv.yinyan.fr'
+        });
+        flvPlayer.attachMediaElement(videoElement.current);
+        flvPlayer.load();
+        flvPlayer.play();
+    }, [])
+
+    return (
+        <div>
+            <section className="hero">
+                <div className="hero-body">
+                    <div className="container">
+                        <h1 className="title">
+                            Live
+                        </h1>
+                        <h2 className="subtitle">
+                            Local student broadcasts his garden via a 3d printed remote control car
+                        </h2>
+                    </div>
+                </div>
+            </section>
+
+            <div className="video-wrapper">
+                <video controls ref={videoElement}></video>
+            </div>
+        </div>
+    )
 }
 
 export default App

@@ -1,10 +1,10 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import { Dimensions } from "react-native"
 import { Col, Row, Grid } from "react-native-easy-grid"
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import {
-    faChevronUp, faChevronDown,
-    faChevronLeft, faChevronRight
+    faArrowUp, faArrowDown,
+    faArrowLeft, faArrowRight
 } from '@fortawesome/free-solid-svg-icons'
 import AppContext from '../AppContext'
 
@@ -26,7 +26,7 @@ const highlight = "limegreen"
 
 const Joystick = () => {
 
-    const {direction} = useContext(AppContext)
+    const { direction } = useContext(AppContext)
 
     return (
         <Grid style={style.grid}>
@@ -34,12 +34,12 @@ const Joystick = () => {
                 <Row></Row>
                 <Row style={style.row}>
                     <FontAwesomeIcon
-                        icon={faChevronLeft}
+                        icon={faArrowLeft}
                         size={50}
                         color={
                             direction === "Left"
-                            ? highlight
-                            : "black"
+                                ? highlight
+                                : "black"
                         }
                     />
                 </Row>
@@ -48,24 +48,24 @@ const Joystick = () => {
             <Col>
                 <Row style={style.row}>
                     <FontAwesomeIcon
-                        icon={faChevronUp}
+                        icon={faArrowUp}
                         size={50}
                         color={
                             direction === "Up"
-                            ? highlight
-                            : "black"
+                                ? highlight
+                                : "black"
                         }
                     />
                 </Row>
                 <Row></Row>
                 <Row style={style.row}>
                     <FontAwesomeIcon
-                        icon={faChevronDown}
+                        icon={faArrowDown}
                         size={50}
                         color={
                             direction === "Down"
-                            ? highlight
-                            : "black"
+                                ? highlight
+                                : "black"
                         }
                     />
                 </Row>
@@ -74,12 +74,12 @@ const Joystick = () => {
                 <Row></Row>
                 <Row style={style.row}>
                     <FontAwesomeIcon
-                        icon={faChevronRight}
+                        icon={faArrowRight}
                         size={50}
                         color={
                             direction === "Right"
-                            ? highlight
-                            : "black"
+                                ? highlight
+                                : "black"
                         }
                     />
                 </Row>

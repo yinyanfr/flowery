@@ -17,6 +17,7 @@ import { Toolbar, COLOR, ThemeContext, getTheme } from 'react-native-material-ui
 
 import Body from './components/Body';
 import Gesture from './components/Gesture';
+import Tap from "./components/Tap"
 
 const uiTheme = {
   palette: {
@@ -38,8 +39,15 @@ const App = () => {
         />
 
         <Gesture>
-          <Body />
+          <Tap
+            onDoubleTap={() => {
+              console.log("double")
+            }}
+          >
+            <Body />
+          </Tap>
         </Gesture>
+
 
       </ThemeContext.Provider>
     </AppContext.Provider>

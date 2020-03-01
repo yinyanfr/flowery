@@ -26,7 +26,7 @@ const Body = () => {
                         <Text style={styles.sectionTitle}>Bienvenu</Text>
                         <Text style={styles.sectionDescription}>
                             C'est fait, votre App <Text style={styles.highlight}>Flowery </Text>
-                            est connectée et près d'utlisation.
+                            est connectée et près d'utliser.
                         </Text>
                     </View>
 
@@ -34,7 +34,7 @@ const Body = () => {
                         <Text style={styles.sectionTitle}>Guide</Text>
                         <View>
                             <Text style={styles.sectionDescription}>Touchez l'écran avec votre doigt pour déplacer le tuyau d'eau.</Text>
-                            <Text style={styles.sectionDescription}>Double cliquez pour arroser.</Text>
+                            <Text style={styles.sectionDescription}>Double tappez pour arroser.</Text>
                         </View>
                     </View>
 

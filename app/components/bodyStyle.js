@@ -24,7 +24,7 @@ export default StyleSheet.create({
         paddingHorizontal: 24,
         justifyContent: "center",
         alignItems: "center",
-        height: Math.floor(0.7 * Dimensions.get("window").width)
+        height: Math.floor(0.7 * Dimensions.get("window").width),
     },
     sectionTitle: {
         fontSize: 24,

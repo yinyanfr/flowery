@@ -6,12 +6,12 @@
  * @flow
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StatusBar,
 } from 'react-native';
 
-// import FitImage from "react-native-fit-image"
+import AppContext from "./AppContext"
 
 import { Toolbar, COLOR, ThemeContext, getTheme } from 'react-native-material-ui'
 
@@ -25,19 +25,24 @@ const uiTheme = {
 }
 
 const App = () => {
+
+  const [direction, setDirection] = useState(null)
+
   return (
-    <ThemeContext.Provider value={getTheme(uiTheme)}>
-      <StatusBar barStyle="dark-content" />
+    <AppContext.Provider value={{ direction, setDirection }}>
+      <ThemeContext.Provider value={getTheme(uiTheme)}>
+        <StatusBar barStyle="dark-content" />
 
-      <Toolbar
-        centerElement="Flowery"
-      />
+        <Toolbar
+          centerElement="Flowery"
+        />
 
-      <Gesture>
-        <Body />
-      </Gesture>
+        <Gesture>
+          <Body />
+        </Gesture>
 
-    </ThemeContext.Provider>
+      </ThemeContext.Provider>
+    </AppContext.Provider>
   );
 };
 

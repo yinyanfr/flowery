@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import styles from "./bodyStyle"
+import Joystick from './Joystick';
 
 const Body = () => {
 
@@ -38,10 +39,7 @@ const Body = () => {
                     </View>
 
                     <View style={styles.imageWrapper}>
-                        <Image
-                            style={styles.image}
-                            source={require("../medias/arrows.png")}
-                        />
+                        <Joystick />
                     </View>
                 </View>
             </View>

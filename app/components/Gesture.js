@@ -1,14 +1,29 @@
-import React, {useState} from 'react'
-import {View} from "react-native"
+import React, {useContext} from 'react'
 import GestureRecognizer, { swipeDirections } from "react-native-swipe-gestures"
-import { Snackbar } from 'react-native-material-ui'
+import AppContext from '../AppContext'
 
 const config = {
-    velocityThreshold: 0.3,
+    velocityThreshold: 0.1,
     directionalOffsetThreshold: 80
 }
 
-const swipeDirection = (dx, dy) => {
+const swipeDirection = ({dx, dy, vx, vy}) => {
+    // console.log({vx, vy})
+    // // velocity
+    // if(Math.max(Math.abs(vx), Math.abs(vy)) < config.velocityThreshold){
+    //     return null
+    // }
+
+    // distance 
+    if(Math.min(Math.abs(dx), Math.abs(dy)) < 5){
+        return null
+    }
+    
+    // direction
+    if(Math.abs(Math.abs(dx) - Math.abs(dy)) < 20){
+        return null
+    }
+
     const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections
     // up
     if(dy < 0 && Math.abs(dy) > Math.abs(dx)){
@@ -29,32 +44,38 @@ const swipeDirection = (dx, dy) => {
     return null
 }
 
+let timer = null
+
 const Gesture = ({children}) => {
 
-    const [noti, setNoti] = useState("ready")
-    const [snack, setSnack] = useState(false)
+    const {setDirection} = useContext(AppContext)
 
     const onSwipe = (name, gestureState) => {
-        const {dx, dy} = gestureState
+        const {dx, dy, vx, vy} = gestureState
         const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections
-        const direction = swipeDirection(dx, dy)
+        const direction = swipeDirection({dx, dy, vx, vy})
+        if(direction && timer){
+            clearTimeout(timer)
+        }
         switch(direction){
             case SWIPE_UP:
-                setNoti("Up")
+                setDirection("Up")
                 break
             case SWIPE_DOWN:
-                setNoti("Down")
+                setDirection("Down")
                 break
             case SWIPE_LEFT:
-                setNoti("Left")
+                setDirection("Left")
                 break
             case SWIPE_RIGHT:
-                setNoti("Right")
+                setDirection("Right")
                 break
             default:
-                setNoti("Unknown")
+                setDirection(null)
         }
-        setSnack(true)
+        timer = setTimeout(() => {
+            setDirection(null)
+        }, 1000)
     }
 
     return (
@@ -64,15 +85,6 @@ const Gesture = ({children}) => {
         >
             <>
                 {children}
-                <View>
-                    <Snackbar 
-                        visible={snack}
-                        message={noti}
-                        onRequestClose={() => {
-                            setSnack(false)
-                        }}
-                    />
-                </View>
             </>
         </GestureRecognizer>
     )

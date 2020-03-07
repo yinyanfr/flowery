@@ -5,18 +5,16 @@ const app = express()
 const http = require('http').createServer(app)
 const io = require('socket.io')(http)
 
-const portReader = require("./port-reader")
+const write = require("./port-write")
 
-const getLevel = line => {
-    let match = line.match(/((?<!ADC)[0-9])+/g)
-    if(match && match.length){
-        return parseInt(match[0])
-    }
-    return 0
-}
+io.on("connection", socket => {
+    socket.on("control", msg => {
+        write(msg[0])
+    })
+})
 
-portReader(line => {
-    io.sockets.emit("adc", getLevel(line))
+app.get("/", (req, res) => {
+    res.send("hello")
 })
 
 http.listen(12345)

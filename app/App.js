@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StatusBar,
 } from 'react-native';
@@ -19,6 +19,8 @@ import Body from './components/Body';
 import Gesture from './components/Gesture';
 import Tap from "./components/Tap"
 
+import lanscan from "./services/lanscan"
+
 const uiTheme = {
   palette: {
     primaryColor: COLOR.green500,
@@ -27,12 +29,19 @@ const uiTheme = {
 
 const App = () => {
 
+  useEffect(() => {
+    lanscan(12345)
+      .then(scanned => {
+        console.log(scanned)
+      })
+  }, [])
+
   const [direction, setDirection] = useState(null)
 
   return (
     <AppContext.Provider value={{ direction, setDirection }}>
       <ThemeContext.Provider value={getTheme(uiTheme)}>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar barStyle="light-content" backgroundColor="limegreen" />
 
         <Toolbar
           centerElement="Flowery"

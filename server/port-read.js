@@ -1,12 +1,8 @@
-const SerialPort = require('serialport')
 const Readline = require('@serialport/parser-readline')
 
+const port = require("./port")
+
 const portReader = (onData) => {
-    const port = new SerialPort(
-        process.env.ARDUINO_PORT, {
-            baudRate: 9600
-        }
-    )
     
     const parser = new Readline()
     port.pipe(parser)

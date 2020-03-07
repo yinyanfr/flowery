@@ -47,7 +47,6 @@ const App = () => {
       timer = setTimeout(() => {
         setDirection(null)
       }, 1000)
-      console.log(direction)
 
       switch(direction){
         case "Up":
@@ -96,4 +95,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App

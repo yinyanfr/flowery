@@ -10,7 +10,6 @@ app.use(bodyParser.json())
 
 app.post("/control", (req, res) => {
     const {msg} = req.body
-    console.log(req.body)
     res.send("ok")
 })
 

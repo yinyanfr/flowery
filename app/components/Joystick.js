@@ -4,8 +4,11 @@ import { Col, Row, Grid } from "react-native-easy-grid"
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import {
     faArrowUp, faArrowDown,
-    faArrowLeft, faArrowRight
+    faArrowLeft, faArrowRight,
 } from '@fortawesome/free-solid-svg-icons'
+import {
+    faDotCircle
+} from "@fortawesome/free-regular-svg-icons"
 import AppContext from '../AppContext'
 
 const style = {
@@ -57,7 +60,17 @@ const Joystick = () => {
                         }
                     />
                 </Row>
-                <Row></Row>
+                <Row style={style.row}>
+                    <FontAwesomeIcon
+                        icon={faDotCircle}
+                        size={50}
+                        color={
+                            direction === "Double"
+                                ? highlight
+                                : "black"
+                        }
+                    />
+                </Row>
                 <Row style={style.row}>
                     <FontAwesomeIcon
                         icon={faArrowDown}

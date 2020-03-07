@@ -1,20 +1,18 @@
 require("dotenv").config()
 
 const express = require('express')
+const bodyParser = require("body-parser")
+
 const app = express()
-const http = require('http').createServer(app)
-const io = require('socket.io')(http)
+app.use(bodyParser.json())
 
-const write = require("./port-write")
+// const write = require("./port-write")
 
-io.on("connection", socket => {
-    socket.on("control", msg => {
-        write(msg[0])
-    })
+app.post("/control", (req, res) => {
+    const {msg} = req.body
+    console.log(req.body)
+    res.send("ok")
 })
 
-app.get("/", (req, res) => {
-    res.send("hello")
-})
 
-http.listen(12345)
+app.listen(12345)

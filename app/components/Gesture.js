@@ -7,6 +7,8 @@ const config = {
     directionalOffsetThreshold: 80
 }
 
+const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections
+
 const swipeDirection = ({dx, dy, vx, vy}) => {
     // console.log({vx, vy})
     // // velocity
@@ -24,7 +26,6 @@ const swipeDirection = ({dx, dy, vx, vy}) => {
         return null
     }
 
-    const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections
     // up
     if(dy < 0 && Math.abs(dy) > Math.abs(dx)){
         return SWIPE_UP
@@ -44,8 +45,6 @@ const swipeDirection = ({dx, dy, vx, vy}) => {
     return null
 }
 
-let timer = null
-
 const Gesture = ({children}) => {
 
     const {setDirection} = useContext(AppContext)
@@ -54,9 +53,7 @@ const Gesture = ({children}) => {
         const {dx, dy, vx, vy} = gestureState
         const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections
         const direction = swipeDirection({dx, dy, vx, vy})
-        if(direction && timer){
-            clearTimeout(timer)
-        }
+
         switch(direction){
             case SWIPE_UP:
                 setDirection("Up")
@@ -73,9 +70,6 @@ const Gesture = ({children}) => {
             default:
                 setDirection(null)
         }
-        timer = setTimeout(() => {
-            setDirection(null)
-        }, 1000)
     }
 
     return (

@@ -1,3 +1,6 @@
+#pragma once
+#include <Arduino.h>
+
 #ifndef JOYSTICK_H
 #define JOYSTICK_H
 
@@ -17,6 +20,6 @@ public:
     void setup();
     char getDirection();
     char getWatering();
-}
+};
 
 #endif

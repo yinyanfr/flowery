@@ -6,11 +6,11 @@ const bodyParser = require("body-parser")
 const app = express()
 app.use(bodyParser.json())
 
-// const write = require("./port-write")
+const write = require("./port-write")
 
-app.post("/control", (req, res) => {
+app.post("/control", async (req, res) => {
     const {msg} = req.body
-    console.log(msg)
+    await write(msg[0])
     res.send("ok")
 })
 

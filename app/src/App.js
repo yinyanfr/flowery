@@ -28,7 +28,7 @@ const uiTheme = {
   }
 }
 
-const SERVER = "http://192.168.0.10:12345"
+const SERVER = "http://192.168.1.100:12345"
 const post = (msg) => (
   postRequest(`${SERVER}/control`, {msg})
     .catch(err => {

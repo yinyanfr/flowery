@@ -6,13 +6,11 @@
 #ifndef MotorGroup_H
 #define MotorGroup_H
 
-const int stepsPerRevolution = 2048;
-
 class MotorGroup
 {
 private:
-    Stepper left = Stepper(stepsPerRevolution, 8, 9, 10, 11);
-    Stepper right = Stepper(stepsPerRevolution, 4, 5, 6, 7);
+    Stepper left = Stepper(2048, 8, 9, 10, 11);
+    Stepper right = Stepper(2048, 4, 5, 6, 7);
     int height;
     int width;
     int initX;

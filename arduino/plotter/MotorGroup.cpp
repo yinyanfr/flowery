@@ -1,6 +1,15 @@
 #pragma once
 #include "MotorGroup.h"
 
+int math(int m, int n)
+{
+    if (m > n)
+    {
+        return m;
+    }
+    return n;
+}
+
 MotorGroup::MotorGroup(
     Stepper leftStepper,
     Stepper rightStepper,
@@ -38,11 +47,20 @@ void MotorGroup::move_left(int unit)
         pow(((double)width - ((double)initX - (double)unit)), 2.0) +
         pow((double)height - (double)initY, 2.0));
 
-    Serial.println(l);
-    Serial.println(r);
+    int round_l = (int)round(l);
+    int round_r = (int)round(r);
 
-    left.step((int)round(l));
-    right.step((int)round(r));
+    for (int i = 0; i < max(round_l, round_r); i++)
+    {
+        if (i < round_l)
+        {
+            left.step(1);
+        }
+        if (i < round_r)
+        {
+            right.step(1);
+        }
+    }
 }
 
 void MotorGroup::move_right(int unit)
@@ -55,11 +73,20 @@ void MotorGroup::move_right(int unit)
         pow(((double)width - ((double)initX + (double)unit)), 2.0) +
         pow((double)height - (double)initY, 2.0));
 
-    Serial.println(l);
-    Serial.println(r);
+    int round_l = (int)round(l);
+    int round_r = (int)round(r);
 
-    left.step((int)round(l));
-    right.step((int)round(r));
+    for (int i = 0; i < max(round_l, round_r); i++)
+    {
+        if (i < round_l)
+        {
+            left.step(-1);
+        }
+        if (i < round_r)
+        {
+            right.step(-1);
+        }
+    }
 }
 
 void MotorGroup::move_up(int unit)
@@ -72,11 +99,20 @@ void MotorGroup::move_up(int unit)
         pow(((double)width - (double)initX), 2.0) +
         pow((double)height - ((double)initY + (double)unit), 2.0));
 
-    Serial.println(l);
-    Serial.println(r);
+    int round_l = (int)round(l);
+    int round_r = (int)round(r);
 
-    left.step(2048);
-    right.step(2048);
+    for (int i = 0; i < max(round_l, round_r); i++)
+    {
+        if (i < round_l)
+        {
+            left.step(1);
+        }
+        if (i < round_r)
+        {
+            right.step(-1);
+        }
+    }
 }
 
 void MotorGroup::move_down(int unit)
@@ -89,9 +125,18 @@ void MotorGroup::move_down(int unit)
         pow(((double)width - (double)initX), 2.0) +
         pow((double)height - ((double)initY - (double)unit), 2.0));
 
-    Serial.println(l);
-    Serial.println(r);
+    int round_l = (int)round(l);
+    int round_r = (int)round(r);
 
-    left.step((int)round(l));
-    right.step((int)round(r));
+    for (int i = 0; i < max(round_l, round_r); i++)
+    {
+        if (i < round_l)
+        {
+            left.step(-1);
+        }
+        if (i < round_r)
+        {
+            right.step(1);
+        }
+    }
 }

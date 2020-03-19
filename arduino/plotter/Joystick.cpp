@@ -14,10 +14,11 @@ void Joystick::setup()
 
 char Joystick::getDirection()
 {
+    int tap = digitalRead(SW_pin);
     int x = analogRead(X_pin);
     int y = analogRead(Y_pin);
 
-    if (x == initX && y == initY)
+    if (x - y < 100 && x - y > -100)
     {
         return 'f';
     }
@@ -44,6 +45,10 @@ char Joystick::getDirection()
         {
             return 's';
         }
+    }
+
+    if(tap == 0){
+        return "j";
     }
 }
 
